@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 load 'config/deploy/settings'
+load 'config/deploy/database'
 
 namespace :deploy do
   
