@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Testapp</title>
+  <%= stylesheet_link_tag    	"application" %>
+  <%= javascript_include_tag 	"application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="container">
+	<div id="header">
+		<div id="login_box">
+			<% if current_user %>
+			  <%= current_user.name %>
+			  <%= link_to "se déconnecter", signout_path %>
+			<% end %>
+		</div>
+	</div>
+	<div id="main">
+		<%= yield %>
+	</div>
+	<div id="footer">&nbsp;</div>
+</div>
+
+
+</body>
+</html>

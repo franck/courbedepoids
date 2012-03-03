@@ -1,0 +1,53 @@
+<h1>Courbe de poids</h1>
+
+<p id="sample_actions">
+<%= link_to "Nouveau poids", new_sample_path, :class => 'button popup_link' %>
+</p>
+
+<div class='popup'>
+	<h4>Nouveau poids <%= link_to('X', '#', :class => 'close') %></h4>
+	<%= render 'form' %>
+</div>
+
+<% if @samples.size > 0 %>
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		new Highcharts.Chart({
+			chart: { renderTo: "sample_chart" },
+			title: { text: "Courbe de poids" },
+		  xAxis: { type: 'datetime' },
+		  yAxis: { title: { text: "Poids" }},
+			series: [{
+				name: "Poids",
+				pointInterval: <%= 1.day * 1000 %>,
+        pointStart: <%= (Sample.last.sampled_at - Sample.first.sampled_at).days.ago.to_i * 1000 %>,
+				data: <%= @samples.map{|s| ["Date.UTC(#{s.sampled_at.year}, #{s.sampled_at.month-1} ,#{s.sampled_at.day})", s.weight.to_f] }.to_s.html_safe.gsub!(/"/, '') %>
+			},
+			{
+				name: 'Objectif',
+				data: <%= @samples.map{|s| ["Date.UTC(#{s.sampled_at.year}, #{s.sampled_at.month-1} ,#{s.sampled_at.day})", 85] }.to_s.html_safe.gsub!(/"/, '') %>
+			}]
+		})
+	})
+</script>
+
+<div id="sample_chart" style="width:930px;height:400px"></div>
+
+<table id="samples">
+	<tr>
+		<th>Date</th>
+		<th>Poids</th>
+		<th>&nbsp;</th>
+	</tr>
+<% for sample in @data %>
+<tr>
+	<td><%= l(sample.sampled_at, :format => :long) %></td>
+	<td><%= number_to_human(sample.weight, :precision => 5) %> kg</td>
+	<td>
+		<%= link_to 'modifier', edit_sample_path(sample)  %>
+		<%= link_to 'supprimer', sample_path(sample), :method => :delete  %>
+	</td>
+</tr>
+<% end %>
+</table>
+<% end %>

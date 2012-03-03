@@ -1,0 +1,10 @@
+<%= form_for @sample do |f| %>
+<div>
+	<%= f.hidden_field :user_id, :value => @current_user.id %>
+	<%= f.label :weight, "Poids" %>
+	<%= f.text_field :weight, :size => 10 %>
+	<%= f.label :sampled_at, "Date" %>
+	<%= f.text_field :sampled_at, :size => 12, :id => "sample_date" %>
+	<%= f.submit "Sauver" %>
+</div>
+<% end %>

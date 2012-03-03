@@ -1,0 +1,14 @@
+.popup {
+  display:none;
+  position:absolute;
+  z-index:10000;
+  width:380px;
+  top:25%; left:40%;
+  border:5px solid lighten($base-color, 0%);
+  background-color:#FFF;
+  padding:0;
+  h4 { margin-top:0; margin-bottom:1em; background-color:$base-color; color:#FFF; font-weight:bold; padding:5px 5px 8px; }
+  form { padding:10px; }
+  a.close { float:right; font-size:0.8em; color:#FFF; }
+  a:hover.close { text-decoration:none; color:#333; }
+}
