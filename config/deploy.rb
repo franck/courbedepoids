@@ -51,7 +51,7 @@ namespace :deploy do
     
 end
 
-after "deploy:symlink", "deploy:symlink_system"
+#after "deploy:symlink", "deploy:symlink_system"
 
 
 #def run_rake(cmd)
