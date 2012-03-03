@@ -1,7 +1,8 @@
 before "deploy:setup", "db:configure"
 after "deploy:update_code", "db:symlink"
 
-set(:database_password, "root")
+set(:database_username, "root")
+set(:database_password, "")
 set(:development_database) { application + "_dev" }
 set(:test_database) { application + "_test" }
 set(:production_database) { application + "_production" }
