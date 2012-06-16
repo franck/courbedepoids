@@ -22,10 +22,6 @@
 				pointInterval: <%= 1.day * 1000 %>,
         pointStart: <%= (Sample.last.sampled_at - Sample.first.sampled_at).days.ago.to_i * 1000 %>,
 				data: <%= @samples.map{|s| ["Date.UTC(#{s.sampled_at.year}, #{s.sampled_at.month-1} ,#{s.sampled_at.day})", s.weight.to_f] }.to_s.html_safe.gsub!(/"/, '') %>
-			},
-			{
-				name: 'Objectif',
-				data: <%= @samples.map{|s| ["Date.UTC(#{s.sampled_at.year}, #{s.sampled_at.month-1} ,#{s.sampled_at.day})", 85] }.to_s.html_safe.gsub!(/"/, '') %>
 			}]
 		})
 	})
@@ -51,3 +47,4 @@
 <% end %>
 </table>
 <% end %>
+<%= will_paginate @data, previous_label: h("<"), next_label: h(">") %>
