@@ -12,22 +12,23 @@
 <% if @samples.size > 0 %>
 <script type="text/javascript" charset="utf-8">
 	$(function(){
-		new Highcharts.Chart({
-			chart: { renderTo: "sample_chart" },
-			title: { text: "Courbe de poids" },
-		  xAxis: { type: 'datetime' },
+
+    new Highcharts.StockChart({
+			chart : { renderTo : 'sample_stockchart', zoomType : 'x' },
+			rangeSelector : { selected : 1 },
+      title : { text : 'Courbe de poids' },
+		  xAxis: { ordinal: false },
 		  yAxis: { title: { text: "Poids" }},
+
 			series: [{
-				name: "Poids",
-				pointInterval: <%= 1.day * 1000 %>,
-        pointStart: <%= (Sample.last.sampled_at - Sample.first.sampled_at).days.ago.to_i * 1000 %>,
-				data: <%= @samples.map{|s| ["Date.UTC(#{s.sampled_at.year}, #{s.sampled_at.month-1} ,#{s.sampled_at.day})", s.weight.to_f] }.to_s.html_safe.gsub!(/"/, '') %>
-			}]
-		})
+        name: "Poids",
+        data: <%= @samples.map{|s| [s.utc_date, s.weight.to_f] }.to_s.html_safe %>
+      }]
+    });
 	})
 </script>
 
-<div id="sample_chart" style="width:930px;height:400px"></div>
+<div id="sample_stockchart" style="width:930px;height:400px"></div>
 
 <table id="samples">
 	<tr>

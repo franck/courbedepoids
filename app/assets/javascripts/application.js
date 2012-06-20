@@ -8,6 +8,7 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require highcharts
+//= require highstock
 //= require samples
 //= require popup
 
