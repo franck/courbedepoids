@@ -1,0 +1,7 @@
+<h1>Utilisateurs</h1>
+
+<table cellspacing="0">
+<% for user in @users %>
+<tr><td><%= link_to user.name, user_path(user) %></td></tr>
+<% end -%>
+</table>

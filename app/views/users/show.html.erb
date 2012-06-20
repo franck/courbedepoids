@@ -1,0 +1,23 @@
+<h1><%= @user.name %></h1>
+
+<% if @samples.size > 0 %>
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+
+    new Highcharts.StockChart({
+			chart : { renderTo : 'sample_stockchart', zoomType : 'x' },
+			rangeSelector : { selected : 1 },
+      title : { text : 'Courbe de poids' },
+		  xAxis: { ordinal: false },
+		  yAxis: { title: { text: "Poids" }},
+
+			series: [{
+        name: "Poids",
+        data: <%= @samples.map{|s| [s.utc_date, s.weight.to_f] }.to_s.html_safe %>
+      }]
+    });
+	})
+</script>
+
+<div id="sample_stockchart" style="width:930px;height:400px"></div>
+<% end -%>

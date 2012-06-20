@@ -9,10 +9,13 @@
 <body>
 <div id="container">
 	<div id="header">
+    <%= link_to "Utilisateurs", users_path %>
 		<div id="login_box">
 			<% if current_user %>
 			  <%= current_user.name %>
 			  <%= link_to "se déconnecter", signout_path %>
+      <% else -%>
+        <%= link_to "Se connecter avec Facebook", "/auth/facebook" %>
 			<% end %>
 		</div>
 	</div>
