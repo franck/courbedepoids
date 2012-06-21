@@ -1,6 +1,5 @@
 require "bundler/capistrano"
 load 'config/deploy/settings'
-load 'config/deploy/database'
 
 namespace :deploy do
   
@@ -52,7 +51,7 @@ namespace :deploy do
     
 end
 
-#after "deploy:symlink", "deploy:symlink_system"
+after "deploy:symlink", "deploy:symlink_system"
 
 
 #def run_rake(cmd)
@@ -60,5 +59,6 @@ end
 #end
 
 
-load 'deploy/assets'
+load 'config/deploy/assets'
 load 'config/deploy/tail_logs'
+
