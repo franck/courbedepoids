@@ -19,3 +19,6 @@ config/database.yml
 
 .rvmrc
 vendor/ruby
+public/system
+public/assets
+.sass-cache
